@@ -5,8 +5,7 @@
 // (Vite подставляет её на этапе сборки; для Vercel задаётся в настройках проекта —
 // Environment Variables), а если переменной нет — используем http://localhost:5000/api
 // для локальной разработки: import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
-const BASE_URL = 'http://localhost:5000/api' // адрес бэкенда, к которому будут ходить все запросы
-
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
 async function request(path, options = {}) { // обёртка вокруг fetch — чтобы не повторять одни и те же настройки в каждом запросе
     const res = await fetch(`${BASE_URL}${path}`, { // склеиваем базовый адрес и конкретный путь, например /user/login
         credentials: 'include', // обязательно для сессий — просим браузер посылать и принимать cookie даже на кросс-доменные запросы
