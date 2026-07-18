@@ -16,7 +16,8 @@ function LoginPage() {
         event.preventDefault()
         setError('')
         try {
-            login(email, password).then(() => navigate('/my-notes'))
+            await login(email, password)
+            navigate('/my-notes')
         } catch (error) {
             setError(error.message)
         }

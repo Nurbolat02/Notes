@@ -18,8 +18,7 @@ function RegisterPage() {
         event.preventDefault()
         try {
             await register(email, password)
-            setEmail('')
-            setPassword('')
+            navigate('/my-notes')
         } catch (error) {
             setError(error.message)
         }
