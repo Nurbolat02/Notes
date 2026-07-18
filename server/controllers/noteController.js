@@ -1,5 +1,5 @@
 const ApiError = require('../error/ApiError') // импортировать ApiError
-const { Note } = require('../models/models') // импортировать { Note } из ../models/models
+const { Note, User } = require('../models/models') // импортировать { Note, User } из ../models/models
 
 // class NoteController:
 class NoteController {
@@ -23,11 +23,23 @@ class NoteController {
 	//     - Note.create({ title, text, userId: req.user.id }) — привязать к текущему юзеру (req.user кладёт authMiddleware)
 	//     - res.json(note)
 	async getAll(req, res) {
-		const note = await Note.findAll()
-		res.json(note)
+		const notes = await Note.findAll({
+			include: { model: User, attributes: ['email'] }
+		})
+		res.json(notes)
 	}
 	//   async getAll(req, res, next):
-	//     - Note.findAll()
+	//     - Note.findAll(), присоединяя email автора через include: User
+	//     - res.json(notes)
+
+	async getMy(req, res) {
+		const notes = await Note.findAll({
+			where: { userId: req.user.id }
+		})
+		res.json(notes)
+	}
+	//   async getMy(req, res, next):
+	//     - Note.findAll({ where: { userId: req.user.id } }) — только заметки текущего юзера
 	//     - res.json(notes)
 	async getOne(req, res, next) {
 		const { id } = req.params

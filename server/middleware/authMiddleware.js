@@ -6,9 +6,6 @@ const ApiError = require('../error/ApiError') // импортировать ApiE
 //   - вызвать next()
 module.exports = async function (req, res, next) {
 	if (!req.session.userId) {
-        res.json({
-            message: req.session
-        })
 		return next(ApiError.unauthorized('Вы не авторизованы'))
 	}
 	req.user = { id: req.session.userId, role: req.session.role }

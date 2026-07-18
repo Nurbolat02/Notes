@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "dev": "nodemon index.js",
     "import-dev-data": "node dev-data/import-dev-data.js --import",
     "delete-dev-data": "node dev-data/import-dev-data.js --delete"
