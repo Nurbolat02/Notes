@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
     }
 
     async function register(email, password) {
-        const newUser = await api.login(email, password)
+        const newUser = await api.register(email, password)
         setUser(newUser)
     }
 
